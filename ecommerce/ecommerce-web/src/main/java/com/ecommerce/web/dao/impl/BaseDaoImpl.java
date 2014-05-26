@@ -39,6 +39,7 @@ public class BaseDaoImpl<T extends BaseEntity> extends BaseDaoSupport implements
 	
 	@SuppressWarnings("unchecked")
 	private Class<T> getGenericParameterizedTypeClass() {
+		@SuppressWarnings("rawtypes")
 		Class currentClass = getClass();
 		
 		while (currentClass != null) {

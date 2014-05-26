@@ -7,9 +7,9 @@ import java.io.IOException;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.ecommerce.common.SystemSetting;
-import com.ecommerce.common.utils.PropertiesUtil;
 import com.ecommerce.core.log.ECLogger;
+import com.ecommerce.web.common.SystemSetting;
+import com.ecommerce.web.common.utils.PropertiesUtil;
 import com.ecommerce.web.service.BaseService;
 
 /**

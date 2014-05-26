@@ -17,6 +17,11 @@
       <artifactId>ecommerce-core</artifactId>
       <version>0.0.1-SNAPSHOT</version>
     </dependency>
+    <dependency>
+      <groupId>com.ecommerce</groupId>
+      <artifactId>ecommerce-model</artifactId>
+      <version>0.0.1-SNAPSHOT</version>
+    </dependency>
   </dependencies>
   <build>
     <finalName>ecommerce-web</finalName>

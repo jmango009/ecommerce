@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.ecommerce.common;
+package com.ecommerce.web.common;
 
 /**
  * @author richard

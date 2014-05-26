@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.ecommerce.common.utils;
+package com.ecommerce.web.common.utils;
 
 import java.io.IOException;
 
