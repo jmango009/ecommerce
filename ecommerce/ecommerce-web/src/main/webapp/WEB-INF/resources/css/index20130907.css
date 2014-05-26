@@ -1,0 +1,106 @@
+/* product(写频道名称) channel common style */
+#banner {zoom:1;position:relative; *z-index:1;width:456px; height:219px;overflow:hidden;} 
+#banner_list img {border:0px;width:456px;} 
+#banner_bg {position:absolute; bottom:0;height:30px;filter: Alpha(Opacity=30);opacity:0.3;z-index:50;cursor:pointer; width:430px;display:none; } 
+#banner_info{position:absolute;font-size:14px;bottom:12px;left:8px;height:22px;color:#666;z-index:501;cursor:pointer;display:none;} 
+#banner_text {position:absolute;width:120px;z-index:1002; right:3px; bottom:3px;} 
+#banner ul {position:absolute;list-style-type:none;z-index:9; bottom:6px; right:3px;}
+#banner ul li {background:url(http://images.onccc.com/i002/ywgo/i2/ico_ban_no.png) no-repeat;width:20px;height:20px;float:left;text-align:center;color:#333;font-weight:bold;cursor:pointer;margin-right:3px;}
+#banner ul li.on {background:url(http://images.onccc.com/i002/ywgo/i2/ico_ban_yes.png) no-repeat;color:#fff;}
+#banner_list a{position:absolute;}
+.banner-text {line-height:44px;height:44px;padding:0px 8px;font-size:14px;}
+
+/* left-sidbar style */
+.index-dyn-bord {padding:3px 10px;border-bottom:1px solid #dfdfdf;}
+.index-dyn-bord li {line-height:21px;}
+.index-dyn-bord li.ico-cj i,.index-dyn-bord li.ico-gy i,.index-dyn-bord li.ico-cg i,.index-dyn-bord li.ico-dj i,.index-dyn-bord li.ico-jy i,.index-dyn-bord li.ico-pc i,.index-dyn-bord li.ico-cl i,.index-dyn-bord li.ico-rz i,.index-dyn-bord li.ico-fk i,.index-dyn-bord span.ico-rz i,.index-dyn-bord span.ico-fk i,.index-rec-bord .tit i,.index-rec-bord .tit span i{background:url(http://images.onccc.com/i002/ywgo/i2/ico_index.png) no-repeat;display:inline;margin:5px 5px 0 0;float:left;}
+.index-dyn-bord li.ico-cj i {background-position:0 0px;width:26px;height:15px;}
+.index-dyn-bord li.ico-gy i {background-position:-26px 0px;width:26px;height:15px;}
+.index-dyn-bord li.ico-cg i {background-position:-52px 0px;width:26px;height:15px;}
+.index-dyn-bord li.ico-dj i {background-position:0px -15px;width:20px;height:20px;margin-top:0px;}
+.index-dyn-bord li.ico-jy i {background-position:-20px -15px;width:18px;height:20px;}
+.index-dyn-bord li.ico-pc i {background-position:-38px -15px;width:18px;height:20px;margin-top:0px;}
+.index-dyn-bord li.ico-bztx i {background:url(http://images.onccc.com/i002/ywgo/i2/ico-cxg.png) no-repeat;display:inline;margin:1px 5px 0 0;float:left;width:19px;height:18px;}
+.index-dyn-bord li.ico-djxi i {background:url(http://images.onccc.com/i002/ywgo/i2/ico-star.png) no-repeat;display:inline;margin:1px 5px 0 0;float:left;width:19px;height:18px;}
+.index-dyn-bord li.ico-cl i {background-position:-56px -15px;width:20px;height:20px;}
+.index-dyn-bord span.ico-rz i {background-position:-76px -15px;width:19px;height:20px;}
+.index-dyn-bord span.ico-fk i {background-position:-95px -15px;width:19px;height:20px;}
+.index-dyn-bord .cxjy {height:26px;padding-top:4px}
+.index-dyn-bord .cxjy li{width:100px;float:left;}
+.index-dyn-bord span.rzwid {height:24px;width:108px;float:left;line-height:24px;display:inline;}
+.index-dyn-bord span.fkwid {height:24px;width:108px;float:left;line-height:24px;display:inline;}
+.sign-bord {background-color:#f85007;border-radius:3px;height:32px;margin-top:5px;}
+.sign-bord a.login {width:134px;border-right:1px solid #ff6f0f;display:block;float:left;height:32px;line-height:32px;text-align:center;color:#fff;}
+.sign-bord a.login:hover {background-color:#ff6f0f; text-decoration:none; cursor:pointer;border-top-left-radius:3px;border-bottom-left-radius:3px;}
+.sign-bord a.sign {width:135px;display:block;float:right;height:32px;line-height:32px;text-align:center;color:#fff;}
+.sign-bord a.sign:hover {background-color:#ff6f0f; text-decoration:none; cursor:pointer;border-top-right-radius:3px;border-bottom-right-radius:3px;}
+.sign-bord a.sup {display:block;height:32px;line-height:32px;text-align:center;color:#fff;}
+.sign-bord a.sup:hover {background-color:#ff6f0f; text-decoration:none; cursor:pointer;border-radius:3px;}
+.no-bord {border:0px;}
+.index-gyandchen {height:82px;overflow:hidden;}
+.index-market-bord {height:112px;border-bottom:1px solid #eee;padding-top:8px; clear:both;}
+.index-market-bord h3 {height:20px;width:462px;dispaly:block-inline;}
+.index-market-bord p {width:230px;float:left;margin-right:5px;}
+.index-market-bord ul {width:462px;float:left;}
+.index-market-bord ul li span a{padding:0 5px 0 6px;display:inline;}
+.index-market-bord ul li em {color:#f60;font-weight:bold;display:inline;margin-left:10px;}
+.index-market-bord ul li em.ht30{height:30px;display:inline;float:left;}
+.index-market-bord ul li em.ht60{height:60px;display:inline;float:left;}
+.tit-brand {height:15px;padding-top:10px; font-weight:bold;color:#464646;}
+.index-brand-bord {border-top:2px solid #dfdfdf;height:1088px !important;_height:0px;margin-top:12px;}
+.index-brand-bord ul {border-bottom:1px dashed #eee;height:120px;}
+.index-brand-bord ul.no-line {border-bottom:0;height:142px;}
+.index-brand-bord ul li img {width:76px;height:40px;margin:12px 6px 0px 0;float:left;}
+.index-brand-bord ul li img.no-margin {margin-right:0px;}
+.index-dongtai-tit{float:left;width:60px;margin-right:10px;}
+.index-num-tit{float:right;width:125px;height:20px;overflow:hidden;}
+.lh24 li {line-height:24px;}
+.in-999 {color:#999;}
+.in-999 a:hover{color:#f60;}
+.right-banner {border-left:1px solid #dfdfdf;border-right:1px solid #dfdfdf;border-bottom:1px solid #dfdfdf;width:238px;}
+.index-rec-bord {width:930px;padding:5px 10px;}
+.index-tit .tit {line-height:32px;height:32px;color:#999;}
+.index-tit .tit span.gyg-left {width:500px;float:left;display:block;}
+.index-tit .tit h3 {font-weight:bold;font-size:14px;color:#464646;display:inline;float:left;}
+.index-tit .tit em {color:#999;float:left;display:inline;margin:0 6px;}
+.index-tit .tit span.gyg-left i{background-position:-112px 0px;width:10px;height:12px;display:inline;float:left;margin-top:10px;}
+.index-tit .tit h5,.index-tit .tit h6 {float:left;display:inline;}
+.index-tit .tit h6 {color:#f60;margin-right:5px;display:inline;}
+.index-tit .tit span.hyh {float:right;width:60px; display:block;}
+.index-tit .tit span.hyh i {background-position:-78px 0px;width:14px;height:16px;margin-top:8px;}
+.index-line {border-bottom:2px solid #dfdfdf;}
+.index-com-box {width:170px;float:left;margin:3px 20px 10px 0;}
+.index-com-box p{width:170px;height:130px;margin-bottom:8px;}
+.no-margin {margin-right:0px;float:right;}
+
+
+.ad-index-left {float:left;width:670px;margin-top:10px;}
+.ad-index-right {float:right;width:270px;margin-top:10px;}
+.news-bord {border-top:2px solid #dfdfdf;border-bottom:1px solid #dfdfdf;border-left:1px solid #dfdfdf;border-right:1px solid #dfdfdf;padding:5px 10px;height:172px;}
+.news-bord .tit {height:24px;}
+.news-bord .tit h4{float:left;}
+.news-bord .tit span{float:right;}
+.index-servise span {width:54px;height:36px;float:left;display:block;padding-left:42px;margin:15px 10px 15px 10px !important;margin:15px 10px 15px 7px;display:inline;}
+.index-servise span.kuaidi{background:url(http://images.onccc.com/i002/ywgo/i2/ico-index-server01.png) no-repeat;}
+.index-servise span.daikuan{background:url(http://images.onccc.com/i002/ywgo/i2/ico-index-server02.png) no-repeat;}
+.index-servise span.dianfei{background:url(http://images.onccc.com/i002/ywgo/i2/ico-index-server03.png) no-repeat;}
+.index-servise span.jipiao{background:url(http://images.onccc.com/i002/ywgo/i2/ico-index-server04.png) no-repeat;}
+.news-list {width:280px;float:left;margin-top:3px;}
+.news-list .text {*height:102px;}
+.news-list .text p{width:128px;float:left;border:1px solid #ccc;margin-right:6px;}
+.news-list .text li{width:142px;float:left;}
+.news-list .list li{line-height:24px !important;line-height:12px;}
+.news-list .list .info_list{width:248px;float:left;}
+.news-list .list .times{color:#999;float:left;}
+.mr-dashed {padding-right:30px;margin-right:30px;border-right:1px dashed #dfdfdf;}
+.mt3{margin-top:3px;}
+
+
+.index-jpy-box {width:170px;float:left;margin:3px 19px 10px 0;_margin:3px 12px 10px 0;}
+.news-bord .a-box{ display:block;width:170px; height:170px; border:#dfdfdf 1px solid; font-size:0;}
+.news-bord .tit{ display:block;height:24px; line-height:24px; color:#444; overflow:hidden;}
+.news-bord .tit span {width:40px;float:right;}
+.news-bord .pay2{width: 170px;height:20px;  font:700 12px/20px; float:left; color:#999; }
+.news-bord .pay2 span{ text-decoration: line-through; font-family:arial;}
+.news-bord .pay{width: 170px;height:24px; padding-left:8px; font:700 14px/24px Arial;color:#E4393B; float:left; }
+/* right-sidbar style */
