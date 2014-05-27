@@ -12,6 +12,7 @@ import org.springframework.security.access.ConfigAttribute;
 import org.springframework.security.access.SecurityConfig;
 
 import com.ecommerce.core.dao.impl.BaseDaoImpl;
+import com.ecommerce.core.exception.ECRuntimeException;
 import com.ecommerce.model.Resource;
 import com.ecommerce.util.support.ECLogger;
 import com.ecommerce.web.consts.DaoQueryConsts;
@@ -35,7 +36,7 @@ public class ResourceDaoImpl extends BaseDaoImpl<Resource> implements ResourceDa
 			roleList = findByNamedQuery(DaoQueryConsts.FIND_ROLES_BY_RESOURCE, params);
 		} catch (Exception e) {
 			logger.error("find roles by username failed." + e);
-			throw e;
+			throw new ECRuntimeException("find roles by username failed.");
 		}
 		
 		List<ConfigAttribute> auths = new ArrayList<ConfigAttribute>();

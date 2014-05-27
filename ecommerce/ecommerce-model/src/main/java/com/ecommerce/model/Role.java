@@ -4,8 +4,6 @@
 package com.ecommerce.model;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -19,7 +17,7 @@ import org.springframework.security.core.GrantedAuthority;
  *
  */
 @Entity
-@Table(name="ec_role")
+@Table(name="ec_roles")
 @Cache(usage=CacheConcurrencyStrategy.READ_WRITE)
 public class Role extends BaseEntity implements Serializable {
 
@@ -27,8 +25,6 @@ public class Role extends BaseEntity implements Serializable {
 
     private String name; 
     private String descn; 
-    private Set<Resource> resources = new HashSet<Resource>();  
-    private Set<User> users = new HashSet<User>();  
       
     @SuppressWarnings("serial")
 	public GrantedAuthority generateGrantedAuthority() {  
@@ -55,20 +51,4 @@ public class Role extends BaseEntity implements Serializable {
 		this.descn = descn;
 	}
 
-	public Set<Resource> getResources() {
-		return resources;
-	}
-
-	public void setResources(Set<Resource> resources) {
-		this.resources = resources;
-	}
-
-	public Set<User> getUsers() {
-		return users;
-	}
-
-	public void setUsers(Set<User> users) {
-		this.users = users;
-	} 
-    
 }

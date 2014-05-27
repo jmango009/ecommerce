@@ -16,6 +16,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
  * @author richard
  *
  */
+@Deprecated
 @Entity
 @Table(name="ec_resource")
 @Cache(usage=CacheConcurrencyStrategy.READ_WRITE)

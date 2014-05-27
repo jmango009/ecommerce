@@ -17,6 +17,7 @@ import org.springframework.security.core.GrantedAuthority;
  * @author richard
  * 
  */
+@Deprecated
 public class AccessDecisionManager implements org.springframework.security.access.AccessDecisionManager {
 	@Override
 	public void decide(Authentication authentication, Object object,
@@ -27,16 +28,13 @@ public class AccessDecisionManager implements org.springframework.security.acces
 			return;
 		}
 
-		// 所请求的资源拥有的权限(一个资源对多个权限)
 		Iterator<ConfigAttribute> ite = configAttributes.iterator();
 
 		while (ite.hasNext()) {
 
 			ConfigAttribute ca = ite.next();
-			// 访问所请求资源所需要的权限
 			String needRole = ((SecurityConfig) ca).getAttribute();
 			System.out.println("needRole is " + needRole);
-			// ga 为用户所被赋予的权限。 needRole 为访问相应的资源应该具有的权限。
 			for (GrantedAuthority ga : authentication.getAuthorities()) {
 
 				if (needRole.trim().equals(ga.getAuthority().trim())) {
@@ -47,7 +45,6 @@ public class AccessDecisionManager implements org.springframework.security.acces
 			}
 
 		}
-		// 没有权限
 		throw new AccessDeniedException("没有权限访问！");
 
 	}

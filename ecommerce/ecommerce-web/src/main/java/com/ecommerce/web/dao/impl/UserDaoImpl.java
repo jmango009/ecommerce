@@ -3,15 +3,10 @@
  */
 package com.ecommerce.web.dao.impl;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Repository;
 
 import com.ecommerce.core.dao.impl.BaseDaoImpl;
@@ -52,32 +47,32 @@ public class UserDaoImpl extends BaseDaoImpl<User> implements UserDao {
         return user;
 	}
 	
-	@Override
-	public List<GrantedAuthority> findUserAuthorityByName(String username) {
-		try{
-			List<GrantedAuthority> auths = new ArrayList<GrantedAuthority>();
-			List<String> authsList = findAuthoritiesByUser(username);
-			
-			for(String roleName: authsList){
-				GrantedAuthority authority = new SimpleGrantedAuthority(roleName);
-				auths.add(authority);
-			}
-			return auths;
-		}catch(Exception e){
-			logger.error("find by authorities by username failed." + e);
-			throw e;
-		}
-	}
-	
-	private List<String> findAuthoritiesByUser(String username) {
-		Map<String, Object> params = new HashMap<String, Object>();
-		params.put(DaoQueryConsts.USERNAME, username);
-		try {
-			return findByNamedQuery(DaoQueryConsts.FIND_AUTHORITIES_BY_USER, params);
-		} catch (Exception e) {
-			logger.error("find by authorities by username failed." + e);
-			throw e;
-		}
-	}
+//	@Override
+//	public List<GrantedAuthority> findUserAuthorityByName(String username) {
+//		try{
+//			List<GrantedAuthority> auths = new ArrayList<GrantedAuthority>();
+//			List<String> authsList = findAuthoritiesByUser(username);
+//			
+//			for(String roleName: authsList){
+//				GrantedAuthority authority = new SimpleGrantedAuthority(roleName);
+//				auths.add(authority);
+//			}
+//			return auths;
+//		}catch(Exception e){
+//			logger.error("find by authorities by username failed." + e);
+//			throw new ECRuntimeException("find by authorities by username failed.");
+//		}
+//	}
+//	
+//	private List<String> findAuthoritiesByUser(String username) {
+//		Map<String, Object> params = new HashMap<String, Object>();
+//		params.put(DaoQueryConsts.USERNAME, username);
+//		try {
+//			return findByNamedQuery(DaoQueryConsts.FIND_AUTHORITIES_BY_USER, params);
+//		} catch (Exception e) {
+//			logger.error("find by authorities by username failed." + e);
+//			throw new ECRuntimeException("find by authorities by username failed.");
+//		}
+//	}
 
 }

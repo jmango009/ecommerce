@@ -12,7 +12,6 @@ import java.util.Map;
 import org.springframework.security.access.ConfigAttribute;
 import org.springframework.security.web.FilterInvocation;
 import org.springframework.security.web.access.intercept.FilterInvocationSecurityMetadataSource;
-import org.springframework.stereotype.Component;
 
 import com.ecommerce.model.Resource;
 import com.ecommerce.web.dao.ResourceDao;
@@ -21,7 +20,7 @@ import com.ecommerce.web.dao.ResourceDao;
  * @author richard
  * 
  */
-@Component
+@Deprecated
 public class SecurityMetadataSource implements FilterInvocationSecurityMetadataSource {
 	
 	@javax.annotation.Resource

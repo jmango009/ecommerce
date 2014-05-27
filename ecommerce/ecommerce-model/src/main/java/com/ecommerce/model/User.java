@@ -6,13 +6,13 @@ package com.ecommerce.model;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -26,7 +26,7 @@ import com.ecommerce.util.BooleanUtil;
  *
  */
 @Entity
-@Table(name="ec_user")
+@Table(name="ec_users")
 @Cache(usage=CacheConcurrencyStrategy.READ_WRITE)
 public class User extends BaseEntity implements UserDetails, Serializable {
 
@@ -37,10 +37,9 @@ public class User extends BaseEntity implements UserDetails, Serializable {
     private Integer enabled;
     private String descn;
     
-    @Transient
-    private Set<Role> roles = new HashSet<Role>();
-    @Transient
-    private List<GrantedAuthority> auths = new ArrayList<GrantedAuthority>();
+    @OneToOne(mappedBy="ec_roles", fetch=FetchType.LAZY)
+    @JoinColumn(name="role_id")
+    private Role role;
 	
 	public User() {}
 	
@@ -63,9 +62,7 @@ public class User extends BaseEntity implements UserDetails, Serializable {
 
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		List<GrantedAuthority> list = new ArrayList<GrantedAuthority>();  
-        for (Role role : roles) {  
-            list.add(role.generateGrantedAuthority());  
-        }  
+        list.add(getRole().generateGrantedAuthority());  
         return list;
 	}
 	
@@ -114,20 +111,12 @@ public class User extends BaseEntity implements UserDetails, Serializable {
 		this.descn = descn;
 	}
 
-	public Set<Role> getRoles() {
-		return roles;
+	public Role getRole() {
+		return role;
 	}
 
-	public void setRoles(Set<Role> roles) {
-		this.roles = roles;
-	}
-
-	public List<GrantedAuthority> getAuths() {
-		return auths;
-	}
-
-	public void setAuths(List<GrantedAuthority> auths) {
-		this.auths = auths;
+	public void setRole(Role role) {
+		this.role = role;
 	}
 
 }

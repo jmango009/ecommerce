@@ -3,11 +3,8 @@
  */
 package com.ecommerce.web.service.impl;
 
-import java.util.List;
-
 import javax.annotation.Resource;
 
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -39,8 +36,7 @@ public class UserDetailServiceImpl extends BaseServiceImpl implements UserDetail
 		if (user == null) {  
             throw new ECRuntimeException("Username '" + username + "' not found");  
         }  
-		List<GrantedAuthority> auths = getUserDao().findUserAuthorityByName(username);
-		user.setAuths(auths);
+		user.getRole(); // load eagerly.
 		
 		return user;
 	}

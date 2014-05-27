@@ -23,6 +23,7 @@ import org.springframework.security.web.access.intercept.FilterInvocationSecurit
  * @author richard
  *
  */
+@Deprecated
 public class FilterSecurityInterceptor extends AbstractSecurityInterceptor implements Filter {
 	
 	@Resource

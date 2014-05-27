@@ -5,20 +5,19 @@
                         http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.2.xsd">
 
 	<!-- global-method-security pre-post-annotations="enabled" /-->
-	<global-method-security pre-post-annotations="enabled" 
-		access-decision-manager-ref="myAccessDecisionManager"/>
 
 	<http pattern="/resources/**" security="none"></http>
+	<http pattern="/login" security="none" />
+	<http pattern="/forgotpassword.jsp" security="none"/>
 
-	<http auto-config="true" use-expressions="true" access-denied-page="/accessdenied">
-		<intercept-url pattern="/login" access="IS_AUTHENTICATED_ANONYMOUSLY" />
-		<intercept-url pattern="/forgotpassword.jsp"/>
+	<http auto-config="true" access-denied-page="/accessdenied">
+		<intercept-url pattern="/admin/**" access="ROLE_ADMIN" />
+ 		<intercept-url pattern="/**" access="ROLE_USER" />
 		
 		<form-login login-page="/login" 
 			authentication-failure-url="/login?error=true"
-			default-target-url="/index" 
-			always-use-default-target='true'/>
-		<remember-me data-source-ref="dataSource" />
+			authentication-success-handler-ref="loginSucessHandler"/>
+		<remember-me user-service-ref="userDetailService" />
 		<logout invalidate-session="true" logout-success-url="/login.jsp" logout-url="/logout" />
 
 		<session-management 
@@ -26,9 +25,11 @@
 			invalid-session-url="/sessionTimeout">
 			<concurrency-control max-sessions="1" error-if-maximum-exceeded="true" />
 		</session-management>
-		<custom-filter ref="myFilter" before="FILTER_SECURITY_INTERCEPTOR" />
 		<session-management session-authentication-strategy-ref="sas" />
 	</http>
+	
+	<beans:bean id="loginSucessHandler"
+		class="com.ecommerce.web.security.ECAuthenticationSuccessHandler" />
 
 	<beans:bean id="sas"
 		class="org.springframework.security.web.authentication.session.ConcurrentSessionControlStrategy">
@@ -41,37 +42,38 @@
 	<beans:bean id="sessionRegistry"  
         class="org.springframework.security.core.session.SessionRegistryImpl" />
         
-	<beans:bean id="myFilter"
-		class="com.spring.security.filter.MyFilterSecurityInterceptor">
-		<beans:property name="authenticationManager" ref="authenticationManager"></beans:property>
-		<beans:property name="accessDecisionManager" ref="accessDecisionManager"></beans:property>
-		<beans:property name="securityMetadataSource" ref="securityMetadataSource"></beans:property>
-	</beans:bean> 
-    
     <authentication-manager alias="authenticationManager">  
         <authentication-provider user-service-ref="userDetailService">  
             <password-encoder hash="md5" ref="passwordEncoder">  
+            	<salt-source user-property="username" />
             </password-encoder>  
         </authentication-provider>  
     </authentication-manager> 
     
-    <beans:bean id="accessDecisionManager"  
-        class="com.ecommerce.web.security.AccessDecisionManager">  
-    </beans:bean> 
-    
-	<beans:bean id="securityMetadataSource"  
-        class="com.ecommerce.web.security.SecurityMetadataSource">  
-    </beans:bean>
-    
-   	<beans:bean id="userDetailService"  
+    <beans:bean id="userDetailService"  
         class="com.ecommerce.web.service.impl.UserDetailServiceImpl">  
     </beans:bean>
-    
     <beans:bean id="passwordEncoder"  
 		class="org.springframework.security.authentication.encoding.Md5PasswordEncoder" />
 		
-	<beans:bean id="roleVoter" class="org.springframework.security.access.vote.RoleVoter">
-    	<beans:property name="rolePrefix" value="ROLE_"/>
-    </beans:bean>
-    
+	<beans:bean id="userDetailsManager"
+  		class="org.springframework.security.provisioning.JdbcUserDetailsManager">
+  		<beans:property name="dataSource" ref="dataSource" />
+  		<beans:property name="userCache" ref="userCache" />
+ 	</beans:bean> 
+ 
+ 	<beans:bean id="userCache"
+  		class="org.springframework.security.core.userdetails.cache.EhCacheBasedUserCache">
+  		<beans:property name="cache" ref="userEhCache" />
+ 	</beans:bean> 
+ 
+ 
+ 	<beans:bean id="userEhCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean">
+  		<beans:property name="cacheName" value="userCache" />
+  		<beans:property name="cacheManager" ref="cacheManager" />
+ 	</beans:bean>
+ 
+	 <beans:bean id="cacheManager"
+  		class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean" />
+	
 </beans:beans>
