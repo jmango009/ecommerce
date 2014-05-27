@@ -1,16 +1,16 @@
 /**
  * 
  */
-package com.ecommerce.web.service.impl;
+package com.ecommerce.core.service.impl;
 
 import java.io.IOException;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.ecommerce.core.log.ECLogger;
-import com.ecommerce.web.common.SystemSetting;
-import com.ecommerce.web.common.utils.PropertiesUtil;
-import com.ecommerce.web.service.BaseService;
+import com.ecommerce.core.SystemSetting;
+import com.ecommerce.core.service.BaseService;
+import com.ecommerce.util.PropertiesUtil;
+import com.ecommerce.util.support.ECLogger;
 
 /**
  * @author richard

@@ -18,6 +18,11 @@
 		<param-value>classpath:config/log4j.properties</param-value>
 	</context-param>
     
+   	<listener>
+		<listener-class>
+        	org.springframework.web.util.Log4jConfigListener
+      	</listener-class>
+   	</listener> 
 	<listener>
 		<listener-class>
 			org.springframework.web.context.ContextLoaderListener
@@ -25,9 +30,9 @@
 	</listener>
 	<listener>
 		<listener-class>
-        	org.springframework.web.util.Log4jConfigListener
-      	</listener-class>
-   </listener> 
+      	    org.springframework.security.web.session.HttpSessionEventPublisher
+   		</listener-class>
+	</listener>
 	
 	<servlet>
 		<servlet-name>springMVC</servlet-name>
@@ -55,4 +60,20 @@
 		<filter-name>springSecurityFilterChain</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
+	
+	<filter>
+		<filter-name>setCharacterEncoding</filter-name>
+		<filter-class>
+			org.springframework.web.filter.CharacterEncodingFilter
+		</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter><!-- filtered type -->
+	<filter-mapping>
+		<filter-name>setCharacterEncoding</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
 </web-app>

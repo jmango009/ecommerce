@@ -9,6 +9,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.ecommerce.core.service.impl.BaseServiceImpl;
 import com.ecommerce.model.News;
 import com.ecommerce.web.dao.NewsDao;
 import com.ecommerce.web.service.NewsService;

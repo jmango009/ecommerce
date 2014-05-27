@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.ecommerce.web.dao;
+package com.ecommerce.core.dao;
 
 import javax.annotation.Resource;
 

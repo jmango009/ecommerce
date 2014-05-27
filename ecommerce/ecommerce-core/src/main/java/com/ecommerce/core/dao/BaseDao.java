@@ -1,10 +1,11 @@
 /**
  * 
  */
-package com.ecommerce.web.dao;
+package com.ecommerce.core.dao;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 import org.hibernate.Criteria;
 
@@ -23,7 +24,7 @@ public interface BaseDao<T extends BaseEntity> {
 	
 	public void saveOrUpdate(Object o);
 	
-	public T getById(Serializable id);
+	public T findById(Serializable id);
     
     public List<T> findAll(Class<T> entityClass);
     
@@ -35,4 +36,5 @@ public interface BaseDao<T extends BaseEntity> {
     
     public void deleteById(Serializable id);    
     
+    public List<T> findByNamedQuery(String queryName, Map<String, Object> queryParams);
 }

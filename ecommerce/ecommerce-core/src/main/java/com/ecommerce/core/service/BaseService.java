@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.ecommerce.web.service;
+package com.ecommerce.core.service;
 
 /**
  * @author richard

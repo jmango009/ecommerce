@@ -11,6 +11,7 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
+import com.ecommerce.core.dao.impl.BaseDaoImpl;
 import com.ecommerce.model.News;
 import com.ecommerce.web.dao.NewsDao;
 

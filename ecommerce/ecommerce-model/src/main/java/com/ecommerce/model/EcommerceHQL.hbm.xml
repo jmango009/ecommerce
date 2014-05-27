@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping schema="ecommerce">
+	<sql-query name="User.FindAuthoritiesByUser">
+		<return-scalar column="authority" />
+       <![CDATA[
+		select role.name as authority
+		from ec_user user 
+		left join ec_user_role user_role 
+			on user.id=user_role.user_id
+		left join ec_role role
+			on role.id=user_role.role_id 
+		where user.username= :username
+       ]]>
+	</sql-query>
+	<sql-query name="User.FindRolesByResource">
+		<return-scalar column="authority" />
+       <![CDATA[
+		select 
+			ro.name as role,
+			re.res_url as url
+		from role role 
+		left join ec_role_resource rr on ro.id=rr.role_id
+		left join ec_resource re on re.id=rr.resc_id
+		where re.res_url= :resoucename
+       ]]>
+	</sql-query>
+</hibernate-mapping>
+    

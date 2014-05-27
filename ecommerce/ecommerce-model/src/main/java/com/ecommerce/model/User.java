@@ -3,63 +3,131 @@
  */
 package com.ecommerce.model;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
+import com.ecommerce.util.BooleanUtil;
 
 /**
  * @author richard
  *
  */
-public class User extends BaseEntity implements UserDetails {
+@Entity
+@Table(name="ec_user")
+@Cache(usage=CacheConcurrencyStrategy.READ_WRITE)
+public class User extends BaseEntity implements UserDetails, Serializable {
 
 	private static final long serialVersionUID = 8012937118259237285L;
 	
-	private String userName;
-	private String realName;
+	private String username;
 	private String password;
-	private String name;
-	private String enabled;
-	private String note;
-
-	public User() {
-		
+    private Integer enabled;
+    private String descn;
+    
+    @Transient
+    private Set<Role> roles = new HashSet<Role>();
+    @Transient
+    private List<GrantedAuthority> auths = new ArrayList<GrantedAuthority>();
+	
+	public User() {}
+	
+	public User(String userName, String password) {
+		this(userName, password, null);
+	}
+	
+	public User(String username, String password, Integer enabled) {
+		this.username = username;
+		this.password = password;
+		this.enabled = enabled;
+	}
+	
+	public User(String username, String password, Integer enabled, String descn) {
+		this.username = username;
+		this.password = password;
+		this.enabled = enabled;
+		this.descn = descn;
 	}
 
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		// 
-		return null;
+		List<GrantedAuthority> list = new ArrayList<GrantedAuthority>();  
+        for (Role role : roles) {  
+            list.add(role.generateGrantedAuthority());  
+        }  
+        return list;
 	}
-
-	public String getUsername() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	
 	public boolean isAccountNonExpired() {
-		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	public boolean isAccountNonLocked() {
-		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	public boolean isCredentialsNonExpired() {
-		// TODO Auto-generated method stub
-		return false;
+		return true;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	@Override
+	public String getPassword() {
+		return password;
 	}
 
 	public boolean isEnabled() {
-		// TODO Auto-generated method stub
-		return false;
+		return BooleanUtil.parse2Boolean(this.enabled);  
+	}
+	
+	public void setEnabled(Boolean enabled) {
+		this.enabled = BooleanUtil.parse2Integer(enabled);
 	}
 
-	public String getPassword() {
-		// TODO Auto-generated method stub
-		return null;
+	public String getDescn() {
+		return descn;
+	}
+
+	public void setDescn(String descn) {
+		this.descn = descn;
+	}
+
+	public Set<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
+	}
+
+	public List<GrantedAuthority> getAuths() {
+		return auths;
+	}
+
+	public void setAuths(List<GrantedAuthority> auths) {
+		this.auths = auths;
 	}
 
 }

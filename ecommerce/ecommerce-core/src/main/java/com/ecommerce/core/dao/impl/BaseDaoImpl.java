@@ -1,12 +1,14 @@
 /**
  * 
  */
-package com.ecommerce.web.dao.impl;
+package com.ecommerce.core.dao.impl;
 
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
@@ -14,10 +16,10 @@ import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Order;
 import org.springframework.util.Assert;
 
+import com.ecommerce.core.dao.BaseDao;
+import com.ecommerce.core.dao.BaseDaoSupport;
 import com.ecommerce.core.exception.ECRuntimeException;
 import com.ecommerce.model.BaseEntity;
-import com.ecommerce.web.dao.BaseDao;
-import com.ecommerce.web.dao.BaseDaoSupport;
 
 /**
  * @author richard
@@ -76,7 +78,7 @@ public class BaseDaoImpl<T extends BaseEntity> extends BaseDaoSupport implements
 	}
 
 	@Override
-	public T getById(Serializable id) {
+	public T findById(Serializable id) {
 		return getHibernateTemplate().get(entityClass, id);
 	}
 
@@ -109,7 +111,7 @@ public class BaseDaoImpl<T extends BaseEntity> extends BaseDaoSupport implements
 
 	@Override
 	public void deleteById(Serializable id) {
-		delete(getById(id));
+		delete(findById(id));
 	}
 
 	@Override
@@ -117,5 +119,19 @@ public class BaseDaoImpl<T extends BaseEntity> extends BaseDaoSupport implements
 	public List<T> findByCriteria(Criteria criteria) {
 		return criteria.list();
 	}
+	
+	@Override
+	public List findByNamedQuery(String queryName, Map<String, Object> queryParams) {
+        String[] params = new String[queryParams.size()];
+        Object[] values = new Object[queryParams.size()];
+        int index = 0;
+        Iterator<String> i = queryParams.keySet().iterator();
+        while (i.hasNext()) {
+            String key = i.next();
+            params[index] = key;
+            values[index++] = queryParams.get(key);
+        }
+        return getHibernateTemplate().findByNamedQueryAndNamedParam(queryName, params, values);
+    }
 
 }

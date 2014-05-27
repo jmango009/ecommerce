@@ -1,39 +1,37 @@
 /**
  * 
  */
-package com.ecommerce.core.service;
+package com.ecommerce.util.support;
 
 import java.io.IOException;
 import java.util.Properties;
 
-import javax.annotation.PostConstruct;
+import javax.persistence.PostLoad;
 
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PropertiesLoaderUtils;
 import org.springframework.stereotype.Component;
 
-import com.ecommerce.core.log.ECLogger;
-
 /**
  * @author richard
  * 
  */
 @Component
-public final class PropertyService {
+public final class PropertyManager {
 
-	private static ECLogger logger = ECLogger.getLogger(PropertyService.class);
+	private static ECLogger logger = ECLogger.getLogger(PropertyManager.class);
 	private static Properties props = null;
 	
-	public String getString(String resourceFileName, String propertyName) throws IOException {
+	public static String getString(String resourceFileName, String propertyName) throws IOException {
 		if (props == null) {
 			props = getProperties(resourceFileName);
 		}
 		return props.getProperty(propertyName);
 	}
 
-	@PostConstruct
-	private Properties getProperties(String resourceFileName) throws IOException {
+	@PostLoad
+	private static Properties getProperties(String resourceFileName) throws IOException {
 		Resource resource = new ClassPathResource(resourceFileName);
 		logger.info("load resources from file: " + resourceFileName);
 		props = PropertiesLoaderUtils.loadProperties(resource);

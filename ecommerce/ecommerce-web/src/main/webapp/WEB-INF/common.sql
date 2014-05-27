@@ -3,7 +3,7 @@
 -- ----------------------------
 DROP TABLE IF EXISTS `ecommerce`.`newsCategory`;
 CREATE TABLE `ecommerce`.`newsCategory` (
-  `id` bigint(20) NOT NULL auto_increment,
+  `id` bigint NOT NULL auto_increment,
   `categoryType` smallint(11) NOT NULL,
   `name` varchar(50) NOT NULL,
   `isDeleted` bit(1) NOT NULL default 0,
@@ -18,7 +18,7 @@ CREATE TABLE `ecommerce`.`newsCategory` (
 -- ----------------------------
 DROP TABLE IF EXISTS `ecommerce`.`news`;
 CREATE  TABLE `ecommerce`.`news` (
-  `id` smallint(20) NOT NULL auto_increment,
+  `id` smallint NOT NULL auto_increment,
   `newsCategoryId` bigint NOT NULL default 1,
   `title` varchar(255) NOT NULL,
   `content` longtext default NULL,
@@ -29,7 +29,7 @@ CREATE  TABLE `ecommerce`.`news` (
   `dateUpdated` datetime default NULL,
   PRIMARY KEY (`id`),
   FOREIGN KEY (`newsCategoryId`) REFERENCES `ecommerce`.`newsCategory` (`id`)
-)ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 -- ----------------------------

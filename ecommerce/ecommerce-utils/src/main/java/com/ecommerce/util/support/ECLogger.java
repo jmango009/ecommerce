@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.ecommerce.core.log;
+package com.ecommerce.util.support;
 
 import org.apache.log4j.Logger;
 
