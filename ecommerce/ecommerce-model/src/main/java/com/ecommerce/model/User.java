@@ -9,9 +9,8 @@ import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Cache;
@@ -37,7 +36,7 @@ public class User extends BaseEntity implements UserDetails, Serializable {
     private Integer enabled;
     private String descn;
     
-    @OneToOne(mappedBy="ec_roles", fetch=FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name="role_id")
     private Role role;
 	

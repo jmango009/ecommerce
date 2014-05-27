@@ -63,8 +63,9 @@
 	</bean>
 	
 	<bean id="sessionFactory"
-		  class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		  class="com.ecommerce.core.ECAnnotationSessionFactoryBean">
        <property name="dataSource" ref="dataSource"></property>
+       <property name="fallbackClasspathPrefix" value="WEB-INF/lib/ecommerce-model*.jar!/"></property>
        <property name="packagesToScan" value="com.ecommerce.model." ></property>
        <property name="hibernateProperties">
            <props>
@@ -101,7 +102,7 @@
 	</tx:advice>	
 		
 	<aop:config>
-		<aop:advisor pointcut="execution(* com.ecommerce.*Service*.*(..))" advice-ref="txAdvice" />
+		<aop:advisor pointcut="execution(* com.ecommerce.web.service.impl.*Service*.*(..))" advice-ref="txAdvice" />
 	</aop:config>
 	
 </beans>

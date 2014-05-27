@@ -40,11 +40,12 @@ public class UserDaoImpl extends BaseDaoImpl<User> implements UserDao {
 
 	@Override
 	public User findUserByUsername(String username) {
-		User user = findById(username);
-		if (user == null) {  
-            throw new ECRuntimeException("Username '" + username + "' not found");  
-        }  
-        return user;
+		Criteria criteria = getSession().createCriteria(User.class);
+		criteria.add(Restrictions.eq(DaoQueryConsts.USERNAME, username));
+		List<User> results = findByCriteria(criteria);
+		
+        if (StringUtil.isEmpty(results)) return null;
+        return results.get(0);
 	}
 	
 //	@Override
