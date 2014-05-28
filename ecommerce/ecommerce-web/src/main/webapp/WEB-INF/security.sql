@@ -37,6 +37,6 @@ references `ecommerce`.`ec_roles` (`id`);
 insert into ec_roles(name,descn) values('ROLE_ADMIN','管理员角色');
 insert into ec_roles(name,descn) values('ROLE_USER','用户角色');
 
-insert into ec_users(role_id,username,password,enabled,descn) values(1,'admin','admin',1,'管理员');
-insert into ec_users(role_id,username,password,enabled,descn) values(2,'user','user',1,'用户');
+insert into ec_users(role_id,username,password,enabled,descn) values(1,'admin','ceb4f32325eda6142bd65215f4c0f371',1,'管理员');
+insert into ec_users(role_id,username,password,enabled,descn) values(2,'user' ,'47a733d60998c719cf3526ae7d106d13',1,'用户');
 

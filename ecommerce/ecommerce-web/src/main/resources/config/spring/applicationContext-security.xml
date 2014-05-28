@@ -10,9 +10,9 @@
 	<http pattern="/login" security="none" />
 	<http pattern="/forgotpassword.jsp" security="none"/>
 
-	<http auto-config="true" access-denied-page="/accessdenied">
+	<http auto-config="true" access-denied-page="/admin/accessdenied">
 		<intercept-url pattern="/admin/**" access="ROLE_ADMIN" />
- 		<intercept-url pattern="/**" access="ROLE_USER" />
+ 		<intercept-url pattern="/**" access="ROLE_ADMIN,ROLE_USER" />
 		
 		<form-login login-page="/login" 
 			authentication-failure-url="/login?error=true"
