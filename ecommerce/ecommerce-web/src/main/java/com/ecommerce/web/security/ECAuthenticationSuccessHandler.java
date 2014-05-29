@@ -17,6 +17,8 @@ import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.WebAttributes;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
+import org.springframework.security.web.savedrequest.RequestCache;
 import org.springframework.security.web.savedrequest.SavedRequest;
 
 import com.ecommerce.util.support.ECLogger;
@@ -29,6 +31,7 @@ public class ECAuthenticationSuccessHandler implements
 		AuthenticationSuccessHandler {
 
 	protected ECLogger logger = ECLogger.getLogger(this.getClass());
+	private RequestCache requestCache = new HttpSessionRequestCache();
 	private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 
 	@Override
@@ -42,7 +45,8 @@ public class ECAuthenticationSuccessHandler implements
 	protected void handle(HttpServletRequest request,
 			HttpServletResponse response, Authentication authentication)
 			throws IOException {
-		String targetUrl = determineTargetUrl(request, authentication);
+		SavedRequest savedRequest = requestCache.getRequest(request, response); 
+		String targetUrl = determineTargetUrl(savedRequest, authentication);
 
 		if (response.isCommitted()) {
 			logger.debug("Response has already been committed. Unable to redirect to "
@@ -53,14 +57,12 @@ public class ECAuthenticationSuccessHandler implements
 		redirectStrategy.sendRedirect(request, response, targetUrl);
 	}
 
-	protected String determineTargetUrl(HttpServletRequest request, 
+	protected String determineTargetUrl(SavedRequest savedRequest, 
 				Authentication authentication) {
 		Collection<? extends GrantedAuthority> authorities = authentication
 				.getAuthorities();
 		
 		// redirect to the last requested url.
-		SavedRequest savedRequest = (SavedRequest) request.getSession().
-				getAttribute("SPRING_SECURITY_SAVED_REQUEST_KEY");
 		if (savedRequest != null) {
 			return savedRequest.getRedirectUrl();
 		}
