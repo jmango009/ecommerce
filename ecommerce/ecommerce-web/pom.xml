@@ -14,6 +14,9 @@
   
   <properties>
  	<finalName>ecommerce-web</finalName>
+ 	<!-- configure these for test -->
+ 	<deploy.webapps>C:/mockD/newMockForEcommerce/apache-tomcat-6.0.18/webapps</deploy.webapps>
+ 	<build.dir>C:/Users/IBM_ADMIN/git/ecommerce/ecommerce/ecommerce-web/target</build.dir>
   </properties>
   
   <dependencies>
@@ -32,17 +35,39 @@
   <build>
     <finalName>${finalName}</finalName>
     <plugins>
-    <plugin>  
-		<groupId>org.codehaus.mojo</groupId>  
-		<artifactId>tomcat-maven-plugin</artifactId>  
-		<configuration>  
-			<url>http://localhost:8090/manager</url>  
-			<username>tomcat</username>  
-			<password>s3cret</password>  
-			<path>/${finalName}</path>  
-		</configuration>  
-       </plugin>  
-    </plugins>
+    	<!-- plugin>  
+			<groupId>org.codehaus.mojo</groupId>  
+			<artifactId>tomcat-maven-plugin</artifactId>  
+			<configuration>  
+				<url>http://localhost:8090/manager</url>  
+				<username>tomcat</username>  
+				<password>s3cret</password>  
+				<path>/${finalName}</path>  
+			</configuration>  
+    	</plugin-->  
+    	
+    	<!-- USED FOR MY TESTING -->
+    	<plugin>
+    		<groupId>org.apache.maven.plugins</groupId>
+        	<artifactId>maven-antrun-plugin</artifactId>
+        	<executions>
+          		<execution>
+            		<phase>install</phase>
+            		<goals>
+              			<goal>run</goal>
+            		</goals>
+            		<configuration>
+              			<tasks>
+              				<delete dir="${deploy.webapps}/${finalName}"/>
+                			<copy todir="${deploy.webapps}">
+                  				<fileset includes="${finalName}.war" dir="${build.dir}"></fileset>
+                			</copy>
+              			</tasks>
+            		</configuration>
+          		</execution>
+        	</executions>
+      </plugin>
+  	</plugins>
   </build>
   
 </project>

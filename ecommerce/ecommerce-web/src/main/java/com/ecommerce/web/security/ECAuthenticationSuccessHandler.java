@@ -17,6 +17,7 @@ import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.WebAttributes;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.savedrequest.SavedRequest;
 
 import com.ecommerce.util.support.ECLogger;
 
@@ -41,7 +42,7 @@ public class ECAuthenticationSuccessHandler implements
 	protected void handle(HttpServletRequest request,
 			HttpServletResponse response, Authentication authentication)
 			throws IOException {
-		String targetUrl = determineTargetUrl(authentication);
+		String targetUrl = determineTargetUrl(request, authentication);
 
 		if (response.isCommitted()) {
 			logger.debug("Response has already been committed. Unable to redirect to "
@@ -52,9 +53,18 @@ public class ECAuthenticationSuccessHandler implements
 		redirectStrategy.sendRedirect(request, response, targetUrl);
 	}
 
-	protected String determineTargetUrl(Authentication authentication) {
+	protected String determineTargetUrl(HttpServletRequest request, 
+				Authentication authentication) {
 		Collection<? extends GrantedAuthority> authorities = authentication
 				.getAuthorities();
+		
+		// redirect to the last requested url.
+		SavedRequest savedRequest = (SavedRequest) request.getSession().
+				getAttribute("SPRING_SECURITY_SAVED_REQUEST_KEY");
+		if (savedRequest != null) {
+			return savedRequest.getRedirectUrl();
+		}
+		// redirect to default url.
 		for (GrantedAuthority grantedAuthority : authorities) {
 			if (grantedAuthority.getAuthority().equals("ROLE_USER")) {
 				return "/index";
@@ -62,7 +72,7 @@ public class ECAuthenticationSuccessHandler implements
 				return "/admin/index";
 			}
 		}
-
+		
 		throw new IllegalStateException();
 	}
 
