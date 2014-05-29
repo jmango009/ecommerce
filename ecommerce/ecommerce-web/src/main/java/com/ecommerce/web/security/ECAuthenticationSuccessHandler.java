@@ -53,27 +53,17 @@ public class ECAuthenticationSuccessHandler implements
 	}
 
 	protected String determineTargetUrl(Authentication authentication) {
-		boolean isUser = false;
-		boolean isAdmin = false;
 		Collection<? extends GrantedAuthority> authorities = authentication
 				.getAuthorities();
 		for (GrantedAuthority grantedAuthority : authorities) {
 			if (grantedAuthority.getAuthority().equals("ROLE_USER")) {
-				isUser = true;
-				break;
+				return "/index";
 			} else if (grantedAuthority.getAuthority().equals("ROLE_ADMIN")) {
-				isAdmin = true;
-				break;
+				return "/admin/index";
 			}
 		}
 
-		if (isUser) {
-			return "/index";
-		} else if (isAdmin) {
-			return "/admin/index";
-		} else {
-			throw new IllegalStateException();
-		}
+		throw new IllegalStateException();
 	}
 
 	protected void clearAuthenticationAttributes(HttpServletRequest request) {

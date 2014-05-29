@@ -45,7 +45,7 @@ public class AccessDecisionManager implements org.springframework.security.acces
 			}
 
 		}
-		throw new AccessDeniedException("没有权限访问！");
+		throw new AccessDeniedException("No permission to access!");
 
 	}
 

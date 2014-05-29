@@ -24,7 +24,7 @@ public class LoginController {
 	@RequestMapping({ "/login" })
 	public ModelAndView index(HttpServletRequest request,
             HttpServletResponse response, ModelMap modelMap) throws Exception {
-		logger.info("start accessing index");
+		logger.info("start accessing login page.");
 		
 		return new ModelAndView("login", modelMap);  
     }

@@ -3,7 +3,9 @@
  */
 package com.ecommerce.web.dao.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
@@ -48,32 +50,14 @@ public class UserDaoImpl extends BaseDaoImpl<User> implements UserDao {
         return results.get(0);
 	}
 	
-//	@Override
-//	public List<GrantedAuthority> findUserAuthorityByName(String username) {
-//		try{
-//			List<GrantedAuthority> auths = new ArrayList<GrantedAuthority>();
-//			List<String> authsList = findAuthoritiesByUser(username);
-//			
-//			for(String roleName: authsList){
-//				GrantedAuthority authority = new SimpleGrantedAuthority(roleName);
-//				auths.add(authority);
-//			}
-//			return auths;
-//		}catch(Exception e){
-//			logger.error("find by authorities by username failed." + e);
-//			throw new ECRuntimeException("find by authorities by username failed.");
-//		}
-//	}
-//	
-//	private List<String> findAuthoritiesByUser(String username) {
-//		Map<String, Object> params = new HashMap<String, Object>();
-//		params.put(DaoQueryConsts.USERNAME, username);
-//		try {
-//			return findByNamedQuery(DaoQueryConsts.FIND_AUTHORITIES_BY_USER, params);
-//		} catch (Exception e) {
-//			logger.error("find by authorities by username failed." + e);
-//			throw new ECRuntimeException("find by authorities by username failed.");
-//		}
-//	}
+	public List<String> testIfNamedQueryWorks(String username) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put(DaoQueryConsts.USERNAME, username);
+		try {
+			return findByNamedQuery(DaoQueryConsts.TEST_SQL, params);
+		} catch (Exception e) {
+			throw new ECRuntimeException("test failed.");
+		}
+	}
 
 }

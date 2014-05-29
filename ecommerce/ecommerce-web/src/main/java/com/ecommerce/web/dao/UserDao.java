@@ -1,6 +1,8 @@
 package com.ecommerce.web.dao;
 
 
+import java.util.List;
+
 import com.ecommerce.core.dao.BaseDao;
 import com.ecommerce.model.User;
 
@@ -14,6 +16,6 @@ public interface UserDao extends BaseDao<User> {
 	
 	public User findUserByUsername(String username);
 	
-//	public List<GrantedAuthority> findUserAuthorityByName(String username);
+	public List<String> testIfNamedQueryWorks(String username);
 	
 }

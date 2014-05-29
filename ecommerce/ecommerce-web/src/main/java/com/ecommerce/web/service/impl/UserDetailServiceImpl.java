@@ -3,6 +3,8 @@
  */
 package com.ecommerce.web.service.impl;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.security.core.userdetails.UserDetails;
@@ -44,6 +46,11 @@ public class UserDetailServiceImpl extends BaseServiceImpl implements UserDetail
 	@Override
 	public User findUserByUsernameAndPassword(String username, String password) {
 		return getUserDao().findUserByUsernameAndPassword(username, password);
+	}
+	
+	@Override
+	public List<String> testIfNamedQueryWorks(String username) {
+		return getUserDao().testIfNamedQueryWorks(username);
 	}
 
 }
