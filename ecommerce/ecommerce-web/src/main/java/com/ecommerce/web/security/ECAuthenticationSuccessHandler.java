@@ -64,14 +64,18 @@ public class ECAuthenticationSuccessHandler implements
 		
 		// redirect to the last requested url.
 		if (savedRequest != null) {
-			return savedRequest.getRedirectUrl();
+			String redirectUrl = savedRequest.getRedirectUrl();
+			if (!redirectUrl.endsWith("verify.htm")) {
+				return redirectUrl;
+			}
 		}
+		
 		// redirect to default url.
 		for (GrantedAuthority grantedAuthority : authorities) {
 			if (grantedAuthority.getAuthority().equals("ROLE_USER")) {
-				return "/index";
+				return "/index.ec";
 			} else if (grantedAuthority.getAuthority().equals("ROLE_ADMIN")) {
-				return "/admin/index";
+				return "/admin/index.ec";
 			}
 		}
 		

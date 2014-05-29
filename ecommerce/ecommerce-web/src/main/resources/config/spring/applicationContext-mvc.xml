@@ -39,11 +39,11 @@
 	</bean>
 	
 	<!-- error page -->
-    <bean id="exceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+    <!-- bean id="exceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
         <property name="exceptionMappings">
             <props>
                 <prop key="java.lang.Exception">error</prop>
             </props>
         </property>
-    </bean>
+    </bean-->
 </beans>

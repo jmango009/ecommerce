@@ -49,7 +49,7 @@
     
     <servlet-mapping>
         <servlet-name>springMVC</servlet-name>
-        <url-pattern>/*</url-pattern>
+        <url-pattern>*.ec</url-pattern>
     </servlet-mapping>
     
     <!-- spring security -->

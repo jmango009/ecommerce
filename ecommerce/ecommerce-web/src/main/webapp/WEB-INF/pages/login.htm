@@ -1,53 +1,131 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
-  <head>
-    <title>My JSP 'login.jsp' starting page</title>
- <meta http-equiv="pragma" content="no-cache">
- <meta http-equiv="cache-control" content="no-cache">
- <meta http-equiv="expires" content="0">   
- <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
- <meta http-equiv="description" content="This is my page">
- <!--
- <link rel="stylesheet" type="text/css" href="styles.css">
- -->
- <style type="text/css">
-    #nametext,#passtext{
-    background-color:#C30;
-    color:#FFF;
-    }
-    #username,#password{
-    width:200px;
-    height:30px;
-    font-size:24px;
-   
-    }
-    #btn{
-    width:150px;
-    }
- </style>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 
-  </head>
- 
-  <body>
-  <center>
-  <form method="POST" action="j_spring_security_check">
-    <table>
-      <tr>
-        <td id="nametext">用户名：</td>
-        <td><input type="text" name="j_username" id="username"/></td>
-      </tr>
-      <tr>
-        <td id="passtext">密码：</td>
-        <td><input type="password" name="j_password" id="password"/></td>
-      </tr>
-      <tr>
-        <td colspan="2">
-        <input type="submit" value="提交" id="btn"/>
-        </td>
-        <td><a href></td>
-      </tr>
-     </table>
-   </form>
-  </center>
-  </body>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>用户登录</title>
+		
+<link href="$!webPath/resources/css/public.css" type="text/css" rel="stylesheet" />
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/resources/js/jquery.validate.min.js"></script>
+<script>
+	jQuery(document).ready(function() {
+		jQuery("#theForm").validate({
+			errorPlacement: function(error, element) {
+            error.appendTo(element.parent().find(".login_error_sp"));
+            element.parent().find(".login_error_sp").show('normal');
+          },
+          success: function(label) {
+            label.parent().hide();
+          },
+          rules: {
+            username: "required",
+            password: "required"#
+            #if($!sysConfig.useSecurityCode),
+            	code: "required"
+            #end
+          },
+          messages: {
+            username: "用户名不能为空",
+            password: "密码不能为空"#
+            #if($!sysConfig.useSecurityCode),
+            	code: "验证码不能为空"
+            #end
+          }
+        });
+      });
+    </script>
+</head>
+
+<body>
+	<div class="main">
+		<div class="head_login">
+			<div class="login_logo" style="margin-top: 30px; padding-left: 80px;">
+				#if($!sysConfig.websiteLogo) 
+					<a href="$!webPath/index.htm"> 
+						<img src="$!imageWebServer/$!sysConfig.websiteLogo.path/$!sysConfig.websiteLogo.name" border="0" />
+					</a> 
+				#else 
+					<a href="$!webPath/index.htm"> 
+						<img src="$!imageWebServer/resources/style/system/front/default/images/logo.png" border="0" />
+					</a> 
+				#end
+			</div>
+		</div>
+		<div class="index">
+			<div class="index2">
+				<div class="login_usertb">
+					<div class="login_usetbox">
+						<div class="login_usrin">
+							<ul>
+								<form action="j_spring_security_check" method="post" name="theForm" id="theForm">
+									<li class="login_usertxt">
+										<b> 登录名： </b> 
+										<input name="j_username" type="text" id="username" class="login_utxt" autocomplete="off" /> 
+										<span class="login_error_sp" style="display: none"> </span>
+									</li>
+									<li class="login_usertxt">
+										<b> 密&nbsp;&nbsp;&nbsp;码： </b> 
+										<input name="j_password" type="password" id="password" autocomplete="off" class="login_utxt" /> 
+										<span class="login_error_sp" style="display: none"> </span>
+									</li>
+									#if($!sysConfig.useSecurityCode)
+									<script>
+                      					function refreshCode() {
+                        					jQuery("#code_img").attr("src", "$!webPath/verify.htm?d" + new Date().getTime());
+                      					}
+                    				</script>
+									<li class="login_usercode">
+										<b> 验证码： </b> 
+										<input name="code" type="text" id="code" autocomplete="off" style="text-transform: uppercase;" class="usecode" /> 
+										<span class="login_codeimg"> 
+											<img style="cursor: pointer;" src="$!webPath/verify.htm" id="code_img" onclick="refreshCode();" width="59" height="27" />
+										</span> 
+										<a href="javascript:void(0);" onclick="refreshCode();" class="usenosee"> 看不清换一张 </a>
+										<span class="login_error_sp" style="display: none"> </span></li> 
+									#end
+									<li class="login_usercheck">
+										<a href="$!webPath/forget.htm" class="forgetpsw"> 忘记登录密码? </a> 
+										<a href="$!webPath/register.htm" class="user_regist"> 免费注册 </a>
+									</li>
+									<li>
+										<input name="" type="submit" class="login_userbtn" value="登录" />
+									</li>
+								</form>
+								#if($!{sysConfig.allowSinaLogin}||$!{sysConfig.allowQQLogin})
+								<li class="login_b">
+									<b> 合作伙伴账号登录: </b> 
+									<span class="login_bsp"> 
+										#if($!{sysConfig.allowQQLogin}) 
+										<a href="$!webPath/qq_login_api.htm" target="_blank"> 
+											<img src="$!webPath/resources/images/login_qq.jpg" width="64" height="21" />
+										</a> 
+										#end 
+										#if($!{sysConfig.allowSinaLogin}) 
+										<a href="$!webPath/sina_login_api.htm" target="_blank"> 
+											<img src="$!webPath/resources/images/login_wb.jpg" width="76" height="21" />
+										</a> 
+										#end
+									</span>
+								</li> 
+								#end
+							</ul>
+						</div>
+					</div>
+					<!-- div class="login_usertb_bgimg">
+						<span class="imgcenter_span">
+							#set($img="$!webPath/$!imageViewTools.random_login_img()")
+							<p>
+								<img src="$!img" width="490" height="400" />
+							</p>
+						</span>
+					</div-->
+				</div>
+			</div>
+		</div>
+		<!--  $!httpInclude.include("/footer.htm") $!uc_logout_js -->
+	</div>
+</body>
+
 </html>

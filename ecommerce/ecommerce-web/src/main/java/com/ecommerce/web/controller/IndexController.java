@@ -17,7 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ecommerce.core.exception.ECRuntimeException;
 import com.ecommerce.model.News;
-import com.ecommerce.web.consts.ViewVarConsts;
+import com.ecommerce.web.consts.EcommerceConsts;
 import com.ecommerce.web.service.NewsService;
 
 /**
@@ -36,18 +36,18 @@ public class IndexController {
 		return newsService;
 	}
 
-	@RequestMapping({ "/index" })
+	@RequestMapping({ "/index.ec" })
 	public ModelAndView index(HttpServletRequest request,
             HttpServletResponse response, ModelMap modelMap) throws Exception {
-		logger.info("start accessing index");
 		List<News> allNews = getNewsService().findAllNews();
-		modelMap.put(ViewVarConsts.INDEX_ALL_NEWS, allNews);
+		modelMap.put(EcommerceConsts.INDEX_ALL_NEWS, allNews);
 		
+		logger.info("start accessing index");
 		return new ModelAndView("index", modelMap);  
     }
 	
 	// test error page
-	@RequestMapping({ "/error" })
+	@RequestMapping({ "/error.ec" })
 	public ModelAndView error(HttpServletRequest request,
             HttpServletResponse response, ModelMap modelMap) throws Exception {
 		throw new ECRuntimeException("A internal Error happened");

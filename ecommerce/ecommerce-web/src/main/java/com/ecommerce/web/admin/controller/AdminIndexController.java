@@ -20,7 +20,6 @@ import com.ecommerce.web.dao.UserDao;
  *
  */
 @Controller
-@RequestMapping({ "/admin" })
 public class AdminIndexController {
 	
 	protected final Logger logger = Logger.getLogger(AdminIndexController.class);
@@ -32,7 +31,7 @@ public class AdminIndexController {
 		return userDao;
 	}
 
-	@RequestMapping({ "/index" })
+	@RequestMapping({ "/admin/index.ec" })
 	public ModelAndView index(HttpServletRequest request,
             HttpServletResponse response, ModelMap modelMap) throws Exception {
 		logger.info("start accessing admin index");
@@ -41,7 +40,7 @@ public class AdminIndexController {
 		return new ModelAndView("admin/index", modelMap);  
     }
 	
-	@RequestMapping({ "/accessdenied" })
+	@RequestMapping({ "/admin/accessdenied.ec" })
 	public ModelAndView accessdenied(HttpServletRequest request,
             HttpServletResponse response, ModelMap modelMap) throws Exception {
 		logger.info("start accessing admin index");

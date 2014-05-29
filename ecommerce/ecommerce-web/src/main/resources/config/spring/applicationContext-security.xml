@@ -6,23 +6,23 @@
 
 	<!-- global-method-security pre-post-annotations="enabled" /-->
 
-	<http pattern="/resources/**" security="none"></http>
-	<http pattern="/login" security="none" />
-	<http pattern="/forgotpassword.jsp" security="none"/>
+	<http pattern="/resources/**/*" security="none"></http>
+	<http pattern="/login.ec" security="none" />
+	<http pattern="/forgotpassword.ec" security="none"/>
 
-	<http auto-config="true" access-denied-page="/admin/accessdenied">
+	<http auto-config="true" access-denied-page="/admin/accessdenied.ec">
 		<intercept-url pattern="/admin/**" access="ROLE_ADMIN" />
  		<intercept-url pattern="/**" access="ROLE_ADMIN,ROLE_USER" />
 		
-		<form-login login-page="/login" 
-			authentication-failure-url="/login?error=true"
+		<form-login login-page="/login.ec" 
+			authentication-failure-url="/login.ec?error=true"
 			authentication-success-handler-ref="loginSucessHandler"/>
 		<remember-me user-service-ref="userDetailService" />
-		<logout invalidate-session="true" logout-success-url="/login.jsp" logout-url="/logout" />
+		<logout invalidate-session="true" logout-success-url="/login.ec" logout-url="/logout.ec" />
 
 		<session-management 
-			session-authentication-error-url="/402.jsp" 
-			invalid-session-url="/sessionTimeout">
+			session-authentication-error-url="/402.ec" 
+			invalid-session-url="/sessionTimeout.ec">
 			<concurrency-control max-sessions="1" error-if-maximum-exceeded="true" />
 		</session-management>
 		<session-management session-authentication-strategy-ref="sas" />
